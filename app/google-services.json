@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "669348565290",
+    "project_id": "itrip-4c79e",
+    "storage_bucket": "itrip-4c79e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:669348565290:android:ff78299cf046b0ae150e53",
+        "android_client_info": {
+          "package_name": "br.edu.infnet.itrip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "669348565290-t3iekpkv7lt7lmei2ogg100k7mongfi0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsRuvgP9jzHK2Qq1oIX1quQQ7j8m7HcE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "669348565290-t3iekpkv7lt7lmei2ogg100k7mongfi0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

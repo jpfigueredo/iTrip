@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/signInFragment">
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="br.edu.infnet.itrip.ui.SignInFragment"
+        android:label="SignIn"
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_signInFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_myTripsFragment"
+            app:destination="@id/myTripsFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="br.edu.infnet.itrip.ui.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="br.edu.infnet.itrip.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/myTripsFragment"
+        android:name="br.edu.infnet.itrip.ui.MyTripsFragment"
+        android:label="iTrip!"
+        tools:layout="@layout/fragment_my_trips">
+        <action
+            android:id="@+id/action_myTripsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_myTripsFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_myTripsFragment_to_addTripFragment"
+            app:destination="@id/addTripFragment" />
+        <action
+            android:id="@+id/action_myTripsFragment_to_detailsTripFragment"
+            app:destination="@id/detailsTripFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="br.edu.infnet.itrip.ui.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" />
+    <fragment
+        android:id="@+id/addTripFragment"
+        android:name="br.edu.infnet.itrip.ui.AddTripFragment"
+        android:label="fragment_add_trip"
+        tools:layout="@layout/fragment_add_trip" >
+        <action
+            android:id="@+id/action_addTripFragment_to_myTripsFragment"
+            app:destination="@id/myTripsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsTripFragment"
+        android:name="br.edu.infnet.itrip.ui.DetailsTripFragment"
+        android:label="fragment_details_trip"
+        tools:layout="@layout/fragment_details_trip" >
+        <action
+            android:id="@+id/action_detailsTripFragment_to_myTripsFragment"
+            app:destination="@id/myTripsFragment" />
+        <action
+            android:id="@+id/action_detailsTripFragment_to_addTripFragment"
+            app:destination="@id/addTripFragment" />
+    </fragment>
+</navigation>

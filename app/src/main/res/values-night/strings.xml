@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="enter">Enter</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="name">Name</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="name_app">iTrip!</string>
+    <string name="register_upercase">REGISTER</string>
+    <string name="authentication_failure">Authentication Failure</string>
+    <string name="password_mismatch">Password Mismatch</string>
+    <string name="register_success">Register Success</string>
+    <string name="email_send">Email send</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="text_forgot_password">We just need your registered email address/nto send you password reset</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="description">Description</string>
+    <string name="country">Country</string>
+    <string name="date">Date</string>
+    <string name="welcome">Welcome,</string>
+    <string name="email_example_com">email@example.com</string>
+    <string name="empty_list">Empty List</string>
+    <string name="delete">Delete</string>
+    <string name="capital_">Capital:</string>
+    <string name="capital">Capital</string>
+    <string name="currency">Currency</string>
+    <string name="language_">Language:</string>
+    <string name="language">Language</string>
+    <string name="population_">Population:</string>
+    <string name="population">Population</string>
+    <string name="area_">Area:</string>
+    <string name="area">Area</string>
+    <string name="signout">SignOut</string>
+    <string name="profile">Profile</string>
+
+    <!--    <string name="facebook_app_id">486635239112640</string>-->
+<!--    <string name="fb_login_protocol_scheme">fb486635239112640</string>-->
+</resources>
