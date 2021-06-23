@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/signInFragment"
         android:name="br.edu.infnet.itrip.ui.SignInFragment"
-        android:label="SignIn"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_registerFragment"
@@ -23,7 +23,7 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="br.edu.infnet.itrip.ui.RegisterFragment"
-        android:label="fragment_register"
+        android:label="Register your account"
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_registerFragment_to_signInFragment"
@@ -31,17 +31,18 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="br.edu.infnet.itrip.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        android:name="br.edu.infnet.itrip.ui.ProfileFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myTripsFragment"
         android:name="br.edu.infnet.itrip.ui.MyTripsFragment"
         android:label="iTrip!"
         tools:layout="@layout/fragment_my_trips">
-        <action
-            android:id="@+id/action_myTripsFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
         <action
             android:id="@+id/action_myTripsFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
@@ -51,17 +52,20 @@
         <action
             android:id="@+id/action_myTripsFragment_to_detailsTripFragment"
             app:destination="@id/detailsTripFragment" />
+        <action
+            android:id="@+id/action_myTripsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="br.edu.infnet.itrip.ui.ForgotPasswordFragment"
-        android:label="fragment_forgot_password"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_forgot_password" />
     <fragment
         android:id="@+id/addTripFragment"
         android:name="br.edu.infnet.itrip.ui.AddTripFragment"
-        android:label="fragment_add_trip"
-        tools:layout="@layout/fragment_add_trip" >
+        android:label="Add your trip"
+        tools:layout="@layout/fragment_add_trip">
         <action
             android:id="@+id/action_addTripFragment_to_myTripsFragment"
             app:destination="@id/myTripsFragment" />
@@ -69,7 +73,7 @@
     <fragment
         android:id="@+id/detailsTripFragment"
         android:name="br.edu.infnet.itrip.ui.DetailsTripFragment"
-        android:label="fragment_details_trip"
+        android:label="Details"
         tools:layout="@layout/fragment_details_trip" >
         <action
             android:id="@+id/action_detailsTripFragment_to_myTripsFragment"

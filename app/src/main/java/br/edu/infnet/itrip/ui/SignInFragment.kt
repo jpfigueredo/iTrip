@@ -161,7 +161,7 @@ class SignInFragment : Fragment() {
     }
 
     private fun setUpWidgets() {
-        activity?.toolbar_layout!!.visibility = View.GONE
+        //activity?.toolbar_layout!!.visibility = View.GONE
     }
 
 }

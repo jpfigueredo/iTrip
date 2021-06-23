@@ -130,7 +130,7 @@ class MyTripsFragment : Fragment() {
                 .set(trip.toMap())
                 .addOnSuccessListener {
                     Log.e(TAG, "Trip document update successful!")
-                    Toast.makeText(context, "Travel has been updated!", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(context, "Travel has been updated!", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener { e ->
                     Log.e(TAG, "Error adding Trip document", e)

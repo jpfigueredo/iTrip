@@ -1,61 +1,127 @@
-
 package br.edu.infnet.itrip.ui
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import br.edu.infnet.itrip.R
+import br.edu.infnet.luis_barbosa_dr4_at.viewModel.UserViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
+import kotlinx.android.synthetic.main.fragment_forgot_password.*
+import kotlinx.android.synthetic.main.fragment_my_trips.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var userViewModel: UserViewModel
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        auth = FirebaseAuth.getInstance()
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        activity?.let { act ->
+            userViewModel = ViewModelProviders.of(act)
+                .get(UserViewModel::class.java)
+        }
+
+        fillUserData()
+        setupListeners()
+    }
+
+    private fun fillUserData() {
+        userViewModel.name.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                et_name_profile.setText(it.toString())
+            }
+        })
+        userViewModel.email.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                et_email_profile.setText(it.toString())
+            }
+        })
+    }
+
+    private fun setupListeners() {
+        change_password_layout.setOnClickListener {
+            val email = et_email_profile.text.toString()
+            if (email.isNotEmpty()) {
+                resetPassword(email)
+            } else {
+                Toast.makeText(context, getString(R.string.enter_your_email), Toast.LENGTH_LONG).show()
+            }
+        }
+        btn_save_changes.setOnClickListener {
+            val email = et_name_profile.text.toString()
+            val nome = et_name_profile.text.toString()
+            if (email.isNotEmpty() && nome.isNotEmpty()){
+                updateNameInFirebase()
+                updateEmailInFirebase()
+            }
+        }
+    }
+
+    private fun resetPassword(email: String) {
+        auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(context, getString(R.string.check_your_email), Toast.LENGTH_LONG).show()
                 }
             }
     }
+
+    private fun updateNameInFirebase() {
+        val profileUpdates = userProfileChangeRequest {
+            displayName = et_name_profile.text.toString()
+        }
+        val user = auth.currentUser
+        user!!.updateProfile(profileUpdates)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    userViewModel.name.value = auth.currentUser!!.displayName.toString()
+                    Toast.makeText(context, getString(R.string.update_success), Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    private fun updateEmailInFirebase() {
+        val user = auth.currentUser
+        val email = et_email_profile.text.toString()
+        user!!.updateEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    userViewModel.email.value = auth.currentUser!!.email.toString()
+                    Toast.makeText(context, getString(R.string.update_success), Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        activity?.menuInflater!!.inflate(R.menu.main_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_signOut -> {
+                auth.signOut()
+                findNavController().navigate(R.id.action_profileFragment_to_signInFragment, null)
+            }
+        }
+        return false
+    }
+
 }

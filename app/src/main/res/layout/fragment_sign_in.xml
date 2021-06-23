@@ -31,19 +31,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="32dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="42dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/rect_radius_right"
-        android:backgroundTint="#BAFFFFFF"
+        android:backgroundTint="#D9FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tv_name_app"
+            android:id="@+id/tv_sign_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -62,11 +62,11 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="62dp"
             android:layout_marginEnd="32dp"
-            app:boxStrokeWidth="3dp"
+            app:boxStrokeWidth="1dp"
             app:layout_constraintBottom_toTopOf="@+id/layout_password_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name_app">
+            app:layout_constraintTop_toBottomOf="@+id/tv_sign_in">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_email_login"
@@ -85,7 +85,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
-            app:boxStrokeWidth="3dp"
+            app:boxStrokeWidth="1dp"
             app:counterEnabled="true"
             app:counterMaxLength="8"
             app:layout_constraintBottom_toTopOf="@+id/btn_sign_in"
@@ -219,6 +219,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    </androidx.cardview.widget.CardView>-->
+    <!--    </androidx.cardview.widget.CardView>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
