@@ -109,9 +109,9 @@ class DetailsTripFragment : Fragment() {
                     tv_continent_details.text = it.subregion
                     tv_currency_details.text = it.currencies[0].name
                     tv_language_details.text = it.languages[0].name
+                    tv_acronym_details.text = it.alpha3Code
                     tv_population_details.text = adjustPopulation(it.population)
                     tv_area_details.text = adjustArea(it.area)
-                    loadFlag(it.flag, img_flag)
                     pb_details.visibility = View.GONE
 
                 }
@@ -143,17 +143,6 @@ class DetailsTripFragment : Fragment() {
 
             }
         })
-    }
-
-    private fun loadFlag(url: String, photo: ImageView){
-        val imageUrl =
-            "https://training.infnet.edu.br/wp-content/uploads/sites/" +
-                    "18/2019/01/infnet-training-x2.png"
-        Picasso
-            .get()
-            .load(url)
-            .error(android.R.drawable.ic_notification_overlay)
-            .into(photo)
     }
 
     private fun adjustPopulation(population: String): String {

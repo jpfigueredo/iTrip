@@ -67,7 +67,7 @@
         android:layout_marginEnd="5dp"
         android:progressBackgroundTint="@color/black"
         android:progressTint="@color/green_a100"
-        android:isIndicator="false"
+        android:isIndicator="true"
         app:layout_constraintBottom_toBottomOf="@+id/tv_date_card"
         app:layout_constraintEnd_toStartOf="@+id/tv_rating_card"
         app:layout_constraintTop_toTopOf="@+id/tv_date_card"

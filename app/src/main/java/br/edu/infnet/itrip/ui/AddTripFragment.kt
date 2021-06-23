@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
@@ -19,6 +18,9 @@ import androidx.core.content.PermissionChecker
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import br.edu.infnet.itrip.AsyncTask.EncodeImageAyncTask
+import br.edu.infnet.itrip.AsyncTask.DecodeImageAsyncTsk
+import br.edu.infnet.itrip.ENCODE_IMAGE
 import br.edu.infnet.itrip.Model.Trip
 import br.edu.infnet.itrip.R
 import br.edu.infnet.itrip.ViewModel.TripViewModel
@@ -79,10 +81,10 @@ class AddTripFragment : Fragment() {
             val idTrip = tripViewModel.tripVM.value?.id
             val countryTrip = et_country_trip.text.toString()
             val dateTrip = et_date_trip.text.toString()
-            val photoTrip = encodedImageString
+            val photoTrip = ENCODE_IMAGE
             val descriptionTrip = et_description_trip.text.toString()
 
-            if (encodedImageString.isNotEmpty() && countryTrip.isNotEmpty() &&
+            if (ENCODE_IMAGE.isNotEmpty() && countryTrip.isNotEmpty() &&
                 dateTrip.isNotEmpty() && photoTrip.isNotEmpty() &&
                 descriptionTrip.isNotEmpty()) {
 
@@ -117,15 +119,17 @@ class AddTripFragment : Fragment() {
                 et_description_trip.setText(trip.descriptionTrip)
                 rb_trip_add.rating = trip.ratingTrip.toFloat()
                 tv_rating_trip.text = trip.ratingTrip
-                encodedImageString = trip.photoTrip
+                ENCODE_IMAGE = trip.photoTrip
 
-                val bytarray: ByteArray = Base64.decode(encodedImageString, Base64.DEFAULT)
+                DecodeImageAsyncTsk(add_photo_trip).execute(ENCODE_IMAGE)
+
+                /*val bytarray: ByteArray = Base64.decode(encodedImageString, Base64.DEFAULT)
                 val bmimage = BitmapFactory.decodeByteArray(
                     bytarray, 0,
                     bytarray.size
                 )
 
-                add_photo_trip.setImageBitmap(bmimage)
+                add_photo_trip.setImageBitmap(bmimage)*/
             }
         })
     }
@@ -203,10 +207,13 @@ class AddTripFragment : Fragment() {
                     imageBitmap = data!!.extras!!["data"] as Bitmap?
                     add_photo_trip.setImageBitmap(imageBitmap)
 
-                    val baos = ByteArrayOutputStream()
-                    imageBitmap!!.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                    val b: ByteArray = baos.toByteArray()
-                    encodedImageString = Base64.encodeToString(b, Base64.DEFAULT)
+//                    val baos = ByteArrayOutputStream()
+//                    imageBitmap!!.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+//                    val b: ByteArray = baos.toByteArray()
+//                    encodedImageString = Base64.encodeToString(b, Base64.DEFAULT)
+
+                    EncodeImageAyncTask(imageBitmap!!).execute()
+
 
                 } catch (e: Exception) {
                     Toast.makeText(context, "${e.message}", Toast.LENGTH_SHORT).show()

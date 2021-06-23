@@ -55,6 +55,7 @@ class MyTripsFragment : Fragment() {
             tripViewModel = ViewModelProviders.of(act)
             .get(TripViewModel::class.java)
         }
+
         tripViewModel.tripVM.value = null
 
         loadTripList()
@@ -110,7 +111,6 @@ class MyTripsFragment : Fragment() {
                 tv_data_user.text = it.toString()
             }
         })
-        tripViewModel.tripVM.value = null
     }
 
 

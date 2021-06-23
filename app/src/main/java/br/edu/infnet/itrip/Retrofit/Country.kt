@@ -15,8 +15,8 @@ data class Country(
     var population : String,
     @SerializedName("area")
     var area : String,
-    @SerializedName("flag")
-    var flag : String,
+    @SerializedName("alpha3Code")
+    var alpha3Code : String,
     @SerializedName("currencies")
     var currencies : List<Currencies>,
     @SerializedName("languages")
