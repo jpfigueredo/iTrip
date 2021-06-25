@@ -129,11 +129,11 @@ class AddTripFragment : Fragment() {
             .add(trip.toMap())
             .addOnSuccessListener { documentReference ->
                 Log.e(TAG, "DocumentSnapshot written with ID: " + documentReference.id)
-                Toast.makeText(context, "Product has been added!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Trip has been added!", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { e ->
-                Log.e(TAG, "Error adding Product document", e)
-                Toast.makeText(context, "Product could not be added!", Toast.LENGTH_SHORT).show()
+                Log.e(TAG, "Error adding Trip document", e)
+                Toast.makeText(context, "Trip could not be added!", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -144,12 +144,12 @@ class AddTripFragment : Fragment() {
                 .document(it)
                 .set(trip.toMap())
                 .addOnSuccessListener {
-                    Log.e(TAG, "Product document update successful!")
-                    Toast.makeText(context, "Product has been updated!", Toast.LENGTH_SHORT).show()
+                    Log.e(TAG, "Trip document update successful!")
+                    Toast.makeText(context, "Trip has been updated!", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener { e ->
-                    Log.e(TAG, "Error adding Product document", e)
-                    Toast.makeText(context, "Product could not be updated!", Toast.LENGTH_SHORT).show()
+                    Log.e(TAG, "Error adding Trip document", e)
+                    Toast.makeText(context, "Trip could not be updated!", Toast.LENGTH_SHORT).show()
                 }
         }
     }

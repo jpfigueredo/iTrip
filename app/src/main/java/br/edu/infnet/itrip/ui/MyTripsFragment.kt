@@ -129,7 +129,6 @@ class MyTripsFragment : Fragment() {
                 .set(trip.toMap())
                 .addOnSuccessListener {
                     Log.e(TAG, "Trip document update successful!")
-                    //Toast.makeText(context, "Travel has been updated!", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener { e ->
                     Log.e(TAG, "Error adding Trip document", e)
@@ -187,16 +186,7 @@ class MyTripsFragment : Fragment() {
                 val tripList = mutableListOf<Trip>()
                 for (doc in documentSnapshots!!) {
                     val result = doc.toObject(Trip::class.java)
-                    val trip = Trip(
-                        doc.id,
-                        result.countryTrip,
-                        result.dateTrip,
-                        result.photoTrip,
-                        result.descriptionTrip,
-                        result.ratingTrip
-                    )
-                    updateTripFirestore(trip)
-                    tripList.add(trip)
+                    tripList.add(result)
                 }
 
                 mAdapter = TripAdapter(tripList) {
