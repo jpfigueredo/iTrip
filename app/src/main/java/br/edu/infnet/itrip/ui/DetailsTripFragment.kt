@@ -93,6 +93,24 @@ class DetailsTripFragment : Fragment() {
         }
     }
 
+    private fun fillFieldsData() {
+        tripViewModel.tripVM.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                tv_country_details.text = it.countryTrip
+                tv_date_details.text = it.dateTrip
+                tv_description_details.text = it.descriptionTrip
+                rb_details.rating = it.ratingTrip.toFloat()
+                tv_rating_details.text = it.ratingTrip
+
+                DecodeImageAsyncTsk(img_photo_trip_details).execute(it.photoTrip)
+
+                pb_details.visibility = View.VISIBLE
+                getData(it.countryTrip)
+
+            }
+        })
+    }
+
     private fun getData(country: String) {
         val retrofitClient =
             NetworkUtils.getRetrofitInstance("https://restcountries.eu/rest/v2/")
@@ -121,24 +139,6 @@ class DetailsTripFragment : Fragment() {
             }
         })
 
-    }
-
-    private fun fillFieldsData() {
-        tripViewModel.tripVM.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                tv_country_details.text = it.countryTrip
-                tv_date_details.text = it.dateTrip
-                tv_description_details.text = it.descriptionTrip
-                rb_details.rating = it.ratingTrip.toFloat()
-                tv_rating_details.text = it.ratingTrip
-
-                DecodeImageAsyncTsk(img_photo_trip_details).execute(it.photoTrip)
-
-                pb_details.visibility = View.VISIBLE
-                getData(it.countryTrip)
-
-            }
-        })
     }
 
     private fun adjustPopulation(population: String): String {

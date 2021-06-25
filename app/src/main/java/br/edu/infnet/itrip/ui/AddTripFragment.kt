@@ -95,7 +95,7 @@ class AddTripFragment : Fragment() {
                         ratingTrip
                     )
 
-                saveInFirestore(idTrip, trip)
+                saveInFirestore(trip)
                 tripViewModel.tripVM.value = null
                 findNavController().navigate(R.id.action_addTripFragment_to_myTripsFragment, null)
 
@@ -154,8 +154,8 @@ class AddTripFragment : Fragment() {
         }
     }
 
-    private fun saveInFirestore(id: String?, trip: Trip) {
-        if (id == null) {
+    private fun saveInFirestore(trip: Trip) {
+        if (trip.id == null) {
             addTripFirestore(trip)
         } else {
             updateTripFirestore(trip)
