@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import br.edu.infnet.itrip.AsyncTask.DecodeImageAsyncTsk
+import br.edu.infnet.itrip.ENCODE_IMAGE
 import br.edu.infnet.itrip.Model.Trip
 import br.edu.infnet.itrip.R
 import br.edu.infnet.itrip.Retrofit.Country
@@ -19,6 +21,7 @@ import br.edu.infnet.itrip.ViewModel.TripViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_add_trip.*
 import kotlinx.android.synthetic.main.fragment_details_trip.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -84,7 +87,7 @@ class DetailsTripFragment : Fragment() {
                     .delete()
                     .addOnCompleteListener {
                         tripViewModel.tripVM.value = null
-                        Toast.makeText(context, "Note has been deleted!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getString(R.string.trip_has_been_deleted), Toast.LENGTH_SHORT).show()
                     }
             }
         }
@@ -122,24 +125,17 @@ class DetailsTripFragment : Fragment() {
 
     private fun fillFieldsData() {
         tripViewModel.tripVM.observe(viewLifecycleOwner, Observer {
-            val trip = tripViewModel.tripVM.value
-            if (trip != null) {
-                tv_country_details.text = trip.countryTrip
-                tv_date_details.text = trip.dateTrip
-                tv_description_details.text = trip.descriptionTrip
-                rb_details.rating = trip.ratingTrip.toFloat()
-                tv_rating_details.text = trip.ratingTrip
+            if (it != null) {
+                tv_country_details.text = it.countryTrip
+                tv_date_details.text = it.dateTrip
+                tv_description_details.text = it.descriptionTrip
+                rb_details.rating = it.ratingTrip.toFloat()
+                tv_rating_details.text = it.ratingTrip
 
-                val bytarray: ByteArray = Base64.decode(trip.photoTrip, Base64.DEFAULT)
-                val bmimage = BitmapFactory.decodeByteArray(
-                    bytarray, 0,
-                    bytarray.size
-                )
-
-                img_photo_trip_details.setImageBitmap(bmimage)
+                DecodeImageAsyncTsk(img_photo_trip_details).execute(it.photoTrip)
 
                 pb_details.visibility = View.VISIBLE
-                getData(trip.countryTrip)
+                getData(it.countryTrip)
 
             }
         })

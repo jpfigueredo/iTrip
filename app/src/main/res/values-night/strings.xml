@@ -37,6 +37,7 @@
     <string name="save_changes">Save Changes</string>
     <string name="check_your_email">Check your email to change your password</string>
     <string name="update_success">Update Success</string>
+    <string name="trip_has_been_deleted">Trip has been deleted!</string>
 
     <!--    <string name="facebook_app_id">486635239112640</string>-->
 <!--    <string name="fb_login_protocol_scheme">fb486635239112640</string>-->

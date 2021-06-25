@@ -70,6 +70,8 @@ class ProfileFragment : Fragment() {
             if (email.isNotEmpty() && nome.isNotEmpty()){
                 updateNameInFirebase()
                 updateEmailInFirebase()
+            } else {
+                Toast.makeText(context, getString(R.string.fill_all_fields), Toast.LENGTH_LONG).show()
             }
         }
     }

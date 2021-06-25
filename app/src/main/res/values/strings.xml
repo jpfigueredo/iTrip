@@ -46,5 +46,6 @@
     <string name="save_changes">Save Changes</string>
     <string name="check_your_email">Check your email to change your password</string>
     <string name="update_success">Update Success</string>
+    <string name="trip_has_been_deleted">Trip has been deleted!</string>
 
 </resources>

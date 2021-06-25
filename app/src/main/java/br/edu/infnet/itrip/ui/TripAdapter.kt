@@ -8,8 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import br.edu.infnet.itrip.AsyncTask.DecodeImageAsyncTsk
+import br.edu.infnet.itrip.ENCODE_IMAGE
 import br.edu.infnet.itrip.Model.Trip
 import br.edu.infnet.itrip.R
+import kotlinx.android.synthetic.main.fragment_add_trip.*
 
 class TripAdapter (
     private var tripsList: MutableList<Trip>,
@@ -42,7 +45,7 @@ class TripAdapter (
         holder.countryTrip.text = trip.countryTrip
         holder.descriptionTrip.text = trip.descriptionTrip
 
-        holder.photoTrip.setImageBitmap(handleBitmap(trip.photoTrip))
+        DecodeImageAsyncTsk(holder.photoTrip).execute(trip.photoTrip)
 
         holder.ratingBar.rating = trip.ratingTrip.toFloat()
         holder.ratingTrip.text = trip.ratingTrip
@@ -54,15 +57,6 @@ class TripAdapter (
 
     override fun getItemCount(): Int {
         return tripsList.size
-    }
-
-    private fun handleBitmap(photo: String): Bitmap {
-        val byteArray: ByteArray = Base64.decode(photo, Base64.DEFAULT)
-        val bmImage = BitmapFactory.decodeByteArray(
-            byteArray, 0,
-            byteArray.size
-        )
-        return bmImage
     }
 
 }

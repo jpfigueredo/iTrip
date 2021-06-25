@@ -115,7 +115,6 @@ class MyTripsFragment : Fragment() {
 
 
     private fun partItemClicked(trip: Trip) {
-
         tripViewModel.tripVM.value = null
         tripViewModel.tripVM.value = trip
         findNavController().navigate(R.id.action_myTripsFragment_to_detailsTripFragment, null)

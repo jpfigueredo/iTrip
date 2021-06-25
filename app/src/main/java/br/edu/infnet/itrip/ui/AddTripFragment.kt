@@ -106,28 +106,19 @@ class AddTripFragment : Fragment() {
     }
 
     private fun fillFieldsData(){
-        val trip = tripViewModel.tripVM.value
-
         tripViewModel.tripVM.observe(viewLifecycleOwner, Observer {
-            if (trip != null) {
+            if (it != null) {
 
                 img_camera_add_trip.visibility = View.GONE
-                et_country_trip.setText(trip.countryTrip)
-                et_date_trip.setText(trip.dateTrip)
-                et_description_trip.setText(trip.descriptionTrip)
-                rb_trip_add.rating = trip.ratingTrip.toFloat()
-                tv_rating_trip.text = trip.ratingTrip
-                ENCODE_IMAGE = trip.photoTrip
+                et_country_trip.setText(it.countryTrip)
+                et_date_trip.setText(it.dateTrip)
+                et_description_trip.setText(it.descriptionTrip)
+                rb_trip_add.rating = it.ratingTrip.toFloat()
+                tv_rating_trip.text = it.ratingTrip
+                ENCODE_IMAGE = it.photoTrip
 
                 DecodeImageAsyncTsk(add_photo_trip).execute(ENCODE_IMAGE)
 
-                /*val bytarray: ByteArray = Base64.decode(encodedImageString, Base64.DEFAULT)
-                val bmimage = BitmapFactory.decodeByteArray(
-                    bytarray, 0,
-                    bytarray.size
-                )
-
-                add_photo_trip.setImageBitmap(bmimage)*/
             }
         })
     }
@@ -205,13 +196,7 @@ class AddTripFragment : Fragment() {
                     imageBitmap = data!!.extras!!["data"] as Bitmap?
                     add_photo_trip.setImageBitmap(imageBitmap)
 
-//                    val baos = ByteArrayOutputStream()
-//                    imageBitmap!!.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-//                    val b: ByteArray = baos.toByteArray()
-//                    encodedImageString = Base64.encodeToString(b, Base64.DEFAULT)
-
                     EncodeImageAyncTask(imageBitmap!!).execute()
-
 
                 } catch (e: Exception) {
                     Toast.makeText(context, "${e.message}", Toast.LENGTH_SHORT).show()
